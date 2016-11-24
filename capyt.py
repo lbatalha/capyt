@@ -41,18 +41,25 @@ if args['delete']:
 		url = url + paste[2]
 	
 	print("DELETE ", url)
-	r = requests.delete(url, data={"token": args['delete']})
-	print(r.text)
-	if r.status_code != 200:
-		exit(1)
-
+	try:
+		r = requests.delete(url, data={"token": args['delete']})
+		print(r.text)
+		if r.status_code != 200:
+			exit(1)
+	except requests.ConnectionError:
+		print("Connection to host failed")
+		exit(2)
 else:
 	parameters = copy.deepcopy(args)
 	del parameters['FILE']
 
 	with fileinput.input(files=args['FILE'], openhook=hook_compressed_encoded(args['encoding'])) as f:
 		parameters['paste'] = ''.join(f)
-		r = requests.post(url, data=parameters)
-		print(r.text)
-		if r.status_code != 200:
-			exit(1)
+		try:
+			r = requests.post(url, data=parameters)
+			print(r.text)
+			if r.status_code != 200:
+				exit(1)
+		except requests.ConnectionError:
+			print("Connection to host failed")
+			exit(2)
