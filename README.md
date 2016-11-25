@@ -13,6 +13,10 @@ Example: https://cpy.pt
 * install to local system however you want 
 * adjust defaults and options if required
 
+##Extra Features
+
+* Transparently open gzip and bzip compressed files
+
 ##Warning
 
 The optional encoding flag only serves to open the file, internally everything is handled and converted to utf-8.
