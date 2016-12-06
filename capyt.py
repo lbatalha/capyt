@@ -13,7 +13,7 @@ parser.add_argument('-d', '--delete', help="Delete paste with supplied delete to
 parser.add_argument('-b', '--burn', type=int, help="Maximum number of paste views before deletion")
 parser.add_argument('-l', '--lexer', help="Lexer to use (pygments get_lexer_by_name)", default="auto")
 parser.add_argument('-t', '--ttl', type=float, help="Time in hours before paste expires", default=1.0)
-parser.add_argument('-r', '--raw', help="Weather to have pastebin return raw or html paste url", default='true')
+parser.add_argument('-r', '--raw', help="Weather to have pastebin return raw or html paste url", default='false')
 parser.add_argument('-e', '--encoding', help="Define file encoding for given file (default: utf-8)")
 
 parser.add_argument('FILE', help="Files to upload", nargs="+") #Re-used as paste ID or URL when deleting
