@@ -1,14 +1,17 @@
 #!/usr/bin/env python3
-
 import requests
 import sys, fileinput, argparse, copy
 from urllib.parse import urlparse
 from os.path import splitext
-
 url = 'https://cpy.pt/'
+from __init__ import __version__
+
+headers = {
+		'User-Agent': 'capyt {}'.format(__version__,)
+		}
 
 parser = argparse.ArgumentParser(description="CLI Utility to interact with pastething")
-
+parser.add_argument('-v', '--version', action='version', version=__version__)
 parser.add_argument('-d', '--delete', help="Delete paste with supplied delete token")
 parser.add_argument('-b', '--burn', type=int, help="Maximum number of paste views before deletion")
 parser.add_argument('-l', '--lexer', help="Lexer to use (pygments get_lexer_by_name)", default="auto")
