@@ -32,7 +32,7 @@ setuptools.setup(
 	],
 	entry_points = {
 		'console_scripts': [
-			'capyt=capyt.capyt',
+			'capyt=capyt.capyt:main',
 		],
 	},
 
