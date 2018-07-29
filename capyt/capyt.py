@@ -4,7 +4,10 @@ import sys, fileinput, argparse, copy
 from urllib.parse import urlparse
 from os.path import splitext
 url = 'https://cpy.pt/'
-from __init__ import __version__
+if __name__ == '__main__':	
+	from __init__ import __version__
+else:
+	from . import __version__
 
 headers = {
 		'User-Agent': 'capyt {}'.format(__version__,)
