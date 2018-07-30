@@ -1,14 +1,21 @@
 #!/usr/bin/env python3
-
 import requests
 import sys, fileinput, argparse, copy
 from urllib.parse import urlparse
 from os.path import splitext
+if __name__ == '__main__':	
+	from __init__ import __version__
+else:
+	from . import __version__
 
 url = 'https://cpy.pt/'
 
-parser = argparse.ArgumentParser(description="CLI Utility to interact with pastething")
+headers = {
+	'User-Agent': 'capyt/{}'.format(__version__,)
+}
 
+parser = argparse.ArgumentParser(description="CLI Utility to interact with pastething")
+parser.add_argument('-v', '--version', action='version', version=__version__)
 parser.add_argument('-d', '--delete', help="Delete paste with supplied delete token")
 parser.add_argument('-b', '--burn', type=int, help="Maximum number of paste views before deletion")
 parser.add_argument('-l', '--lexer', help="Lexer to use (pygments get_lexer_by_name)", default="auto")
@@ -18,6 +25,7 @@ parser.add_argument('-e', '--encoding', help="Define file encoding for given fil
 
 parser.add_argument('FILE', help="Files to upload", nargs="+") #Re-used as paste ID or URL when deleting
 args = vars(parser.parse_args())
+
 
 #add encoding option to compressed hook
 def hook_compressed_encoded(encoding):
@@ -33,33 +41,40 @@ def hook_compressed_encoded(encoding):
 			return open(filename, mode, encoding=encoding)
 	return hook_compressed
 
-if args['delete']:
-	paste = urlparse(args['FILE'][0])
-	if paste[0] != '':
-		url = args['FILE'][0]
-	else:
-		url = url + paste[2]
-	
-	print("DELETE ", url)
-	try:
-		r = requests.delete(url, data={"token": args['delete']})
-		print(r.text)
-		if r.status_code != 200:
-			exit(1)
-	except requests.ConnectionError:
-		print("Connection to host failed")
-		exit(2)
-else:
-	parameters = copy.deepcopy(args)
-	del parameters['FILE']
+def main():
+	global url
+	global headers
 
-	with fileinput.input(files=args['FILE'], openhook=hook_compressed_encoded(args['encoding'])) as f:
-		parameters['paste'] = ''.join(f)
+	if args['delete']:
+		paste = urlparse(args['FILE'][0])
+		if paste[0] != '':
+			url = args['FILE'][0]
+		else:
+			url = url + paste[2]
+
+		print("DELETE ", url)
 		try:
-			r = requests.post(url, data=parameters)
+			r = requests.delete(url, data={"token": args['delete']}, headers=headers)
 			print(r.text)
 			if r.status_code != 200:
 				exit(1)
 		except requests.ConnectionError:
 			print("Connection to host failed")
 			exit(2)
+	else:
+		parameters = copy.deepcopy(args)
+		del parameters['FILE']
+
+		with fileinput.input(files=args['FILE'], openhook=hook_compressed_encoded(args['encoding'])) as f:
+			parameters['paste'] = ''.join(f)
+			try:
+				r = requests.post(url, data=parameters, headers=headers)
+				print(r.text)
+				if r.status_code != 200:
+					exit(1)
+			except requests.ConnectionError:
+				print("Connection to host failed")
+				exit(2)
+
+if __name__ == "__main__":
+	main()
