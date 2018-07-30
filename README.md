@@ -9,9 +9,28 @@ Example: https://cpy.pt
 
 ## Installation
 
-* install dependencies
-* install to local system however you want 
+Using pip is the easiest way to install this
+Install from pypi: `pip install capyt`
+
+You can also manually install this from source:
+* install dependencies - `pip install -r requirements.txt`
+* symlink `capyt/capyt.py` to a location of your choice
 * adjust defaults and options if required
+
+## Usage
+
+`capyt -h` to see all available options
+
+### Pasting
+
+- paste a single file `capyt somefile`
+- create a single paste with many files concatenated `capyt file1 file2 file3`
+- paste from stdin `somestdout | capyt -`
+
+### Deleting a paste
+
+- `capyt -d DELETE_TOKEN PASTE_ID`
+- `capyt -d DELETE_TOKEN https://cpy.pt/PASTE_ID`
 
 ## Extra Features
 
