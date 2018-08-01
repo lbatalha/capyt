@@ -14,6 +14,7 @@ headers = {
 	'User-Agent': 'capyt/{}'.format(__version__,)
 }
 
+
 parser = argparse.ArgumentParser(description="CLI Utility to interact with pastething")
 parser.add_argument('-v', '--version', action='version', version=__version__)
 parser.add_argument('-d', '--delete', help="Delete paste with supplied delete token")
@@ -45,6 +46,8 @@ def main():
 	global url
 	global headers
 
+	timeout = 30
+
 	if args['delete']:
 		paste = urlparse(args['FILE'][0])
 		if paste[0] != '':
@@ -54,7 +57,7 @@ def main():
 
 		print("DELETE ", url)
 		try:
-			r = requests.delete(url, data={"token": args['delete']}, headers=headers)
+			r = requests.delete(url, data={"token": args['delete']}, headers=headers, timeout=timeout)
 			print(r.text)
 			if r.status_code != 200:
 				exit(1)
@@ -68,7 +71,7 @@ def main():
 		with fileinput.input(files=args['FILE'], openhook=hook_compressed_encoded(args['encoding'])) as f:
 			parameters['paste'] = ''.join(f)
 			try:
-				r = requests.post(url, data=parameters, headers=headers)
+				r = requests.post(url, data=parameters, headers=headers, timeout=timeout)
 				print(r.text)
 				if r.status_code != 200:
 					exit(1)
