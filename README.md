@@ -9,8 +9,8 @@ Example: https://cpy.pt
 
 ## Installation
 
-Using pip is the easiest way to install this
-Install from pypi: `pip install capyt`
+Using pip is the easiest way to install:
+`pip install capyt`
 
 You can also manually install this from source:
 * install dependencies - `pip install -r requirements.txt`
