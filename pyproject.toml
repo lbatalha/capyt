@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "capyt"
-version = "1.2"
+version = "1.2.1"
 description = "A python3 CLI utility to interface with cpy.pt"
 readme = {file = "README.md", content-type = "text/markdown"}
 requires-python = ">=3.10"
