@@ -9,13 +9,11 @@ Example: https://cpy.pt
 
 ## Installation
 
-Using pip is the easiest way to install:
-`pip install capyt`
+Using uv is the easiest way run:
+`uvx capyt`
 
-You can also manually install this from source:
-* install dependencies - `pip install -r requirements.txt`
-* symlink `capyt/capyt.py` to a location of your choice
-* adjust defaults and options if required
+Installing is also easy:
+`uv tool install capyt`
 
 ## Usage
 

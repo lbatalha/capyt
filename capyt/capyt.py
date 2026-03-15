@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 import requests
-import sys, fileinput, argparse, copy
+import fileinput, argparse, copy
 from urllib.parse import urlparse
 from os.path import splitext
-if __name__ == '__main__':	
+if __name__ == '__main__':
 	from __init__ import __version__
 else:
 	from . import __version__
