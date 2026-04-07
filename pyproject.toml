@@ -20,7 +20,7 @@ classifiers = [
     "Topic :: Utilities",
 ]
 dependencies = [
-    "requests>=2.32",
+    "requests>=2.33.0",
 ]
 
 [project.scripts]

@@ -1,29 +1,35 @@
 # A python3 CLI utility to interface with [pastething](https://github.com/lbatalha/pastething)
 
-Example: https://cpy.pt
+Example: `https://cpy.pt`
 
 ## Dependencies
 
-* python3
-* requests
+- python3
+- requests
 
 ## Installation
 
 Using uv is the easiest way run:
-`uvx capyt`
+
+```bash
+uvx capyt
+```
 
 Installing is also easy:
-`uv tool install capyt`
+
+```bash
+uv tool install capyt
+```
 
 ## Usage
 
-`capyt -h` to see all available options
+`capyt -h` to see all available options.
 
 ### Pasting
 
-- paste a single file `capyt somefile`
-- create a single paste with many files concatenated `capyt file1 file2 file3`
-- paste from stdin `somestdout | capyt -`
+- paste a single file: `capyt somefile`
+- create a single paste with many files concatenated: `capyt file1 file2 file3`
+- paste from stdin: `somestdout | capyt -`
 
 ### Deleting a paste
 
@@ -32,9 +38,13 @@ Installing is also easy:
 
 ## Extra Features
 
-* Transparently open gzip and bzip compressed files
+- Transparently open gzip and bzip compressed files
 
 ## Warning
 
-The optional encoding flag only serves to open the file, internally everything is handled and converted to utf-8.
-Retrieved pastes are utf-8 encoded.
+The optional encoding flag only serves to open the file, internally everything is handled and converted to utf-8. Retrieved pastes are utf-8 encoded.
+
+## Developing
+
+- Clone the repo
+- `uv sync` to setup the environment
